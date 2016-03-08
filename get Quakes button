@@ -1,0 +1,23 @@
+public ArrayList<Double[]> PinPoints = new ArrayList<Double[]>();
+
+    //will get the next 10 quake locations and display them on the map
+    public void getBears(View v) {
+        //Double [] temp = new Double[4];
+        Log.i(LOG_TAG, "Quakes message: " + Quakes.get(0).getMessage());
+        int counter = 0;
+        while ( counter < 10 && Quakes.get(0).getCount() >= 2) {
+            Double lat = Quakes.get(1).getLat();
+            Double lng = Quakes.get(1).getLng();
+            Double mag = Quakes.get(1).getMag();
+            Double dep = Double.valueOf(Quakes.get(1).getDepth());
+            //code provided by https://developers.google.com/maps/documentation/android-api/marker#introduction
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(lat, lng))
+                    .title("Hello world"));
+
+            Double[] temp = {lat, lng, mag, dep};
+            PinPoints.add(temp);
+            //Quakes.remove(1);
+            counter++;
+        }
+    }
